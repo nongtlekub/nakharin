@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>AFK Journey</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@400;700&display=swap');
+
+    body {
+      margin: 0;
+      font-family: 'Noto Sans Thai', sans-serif;
+      color: white;
+      /* ใช้สีพื้นหลังเดิมตามที่ร้องขอ */
+      background: linear-gradient(to top, #f9b233, #ff6f61, #f05a28); 
+      background-size: cover;
+      background-position: center;
+      min-height: 100vh;
+      width: 100vw; /* ให้ยืดเต็มความกว้าง */
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: 30px 15px;
+      position: relative;
+      max-width: 100%; 
+      box-sizing: border-box; /* สำคัญเพื่อให้ padding ไม่ดันเนื้อหาเกิน 100% */
+    }
+
+    h1 {
+      font-size: 3.8em; /* เพิ่มขนาดหัวข้อให้ใหญ่ขึ้นอีก */
+      font-weight: 700;
+      margin: 0;
+      text-shadow: 3px 3px 6px rgba(0,0,0,0.4); /* เพิ่มเงาให้ดูเด่นขึ้น */
+      line-height: 1.2; /* ปรับ line-height เล็กน้อย */
+    }
+
+    .season-text {
+      font-size: 22px; /* เพิ่มขนาดตัวอักษรให้ใหญ่ขึ้นอีก */
+      margin: 30px auto 50px; /* เพิ่มระยะห่างให้มากขึ้น */
+      max-width: 900px; /* ขยาย max-width ให้รองรับข้อความยาวขึ้นบนจอใหญ่ */
+      line-height: 1.8; /* ปรับ line-height ให้อ่านง่ายขึ้น */
+      text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+    }
+
+    .container {
+      display: flex;
+      gap: 40px; /* เพิ่มระยะห่างระหว่าง Card ให้กว้างขึ้น */
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: 20px; /* เพิ่มระยะห่างจากข้อความ */
+    }
+
+    .card {
+      width: 250px; /* เพิ่มขนาด Card ให้ใหญ่ขึ้น */
+      height: 250px; /* เพิ่มขนาด Card ให้ใหญ่ขึ้น */
+      background: linear-gradient(145deg, #ffffff, #e6e6e6);
+      border: none;
+      border-radius: 30px; /* ปรับมุมโค้งให้มนขึ้น */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 26px; /* เพิ่มขนาดตัวอักษรใน Card ให้ใหญ่ขึ้น */
+      font-weight: bold;
+      color: #222;
+      text-decoration: none;
+      transition: transform 0.3s ease, box-shadow 0.4s ease; /* ปรับ transition ให้สมูทขึ้น */
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3); /* เพิ่มเงาให้เข้มขึ้นและมีมิติ */
+    }
+
+    .card:hover {
+      transform: scale(1.12); /* ขยายใหญ่ขึ้นเมื่อ Hover มากขึ้น */
+      box-shadow: 0 18px 36px rgba(0, 0, 0, 0.5); /* เพิ่มเงาให้เข้มขึ้นเมื่อ Hover */
+    }
+
+    .footer {
+      position: fixed;
+      bottom: 20px; /* ปรับตำแหน่งเล็กน้อย */
+      right: 25px; /* ปรับตำแหน่งเล็กน้อย */
+      font-size: 15px; /* เพิ่มขนาดตัวอักษร */
+      color: #fff;
+      background-color: rgba(0, 0, 0, 0.65); /* ปรับความทึบแสงเล็กน้อย */
+      padding: 10px 15px; /* เพิ่ม Padding */
+      border-radius: 12px; /* ปรับมุมโค้งเล็กน้อย */
+      box-shadow: 0 4px 10px rgba(0,0,0,0.6);
+      z-index: 1000; /* ให้แน่ใจว่าอยู่ด้านบนสุด */
+    }
+
+    .footer a {
+      color: #fff;
+      text-decoration: none;
+    }
+
+    .footer a:hover {
+      text-decoration: underline;
+    }
+
+    /* Media Queries สำหรับหน้าจอขนาดกลาง (Tablet) */
+    @media (max-width: 992px) {
+      h1 {
+        font-size: 3.2em;
+      }
+      .season-text {
+        font-size: 20px;
+        max-width: 750px;
+      }
+      .card {
+        width: 200px;
+        height: 200px;
+        font-size: 22px;
+      }
+      .container {
+        gap: 30px;
+      }
+    }
+
+    /* Media Queries สำหรับหน้าจอขนาดเล็ก (Mobile) */
+    @media (max-width: 768px) { 
+      h1 {
+        font-size: 2.8em; 
+      }
+      .season-text {
+        font-size: 18px; 
+        margin: 25px auto 35px;
+        max-width: 600px;
+      }
+      .container {
+        gap: 25px; 
+      }
+      .card {
+        width: 180px; 
+        height: 180px; 
+        font-size: 20px; 
+        border-radius: 20px;
+      }
+      .footer {
+        font-size: 14px;
+        right: 20px;
+        bottom: 15px;
+        padding: 8px 12px;
+      }
+    }
+
+    @media (max-width: 480px) { /* สำหรับมือถือขนาดเล็กมากๆ */
+      h1 {
+        font-size: 2.2em;
+        line-height: 1.3;
+      }
+      .season-text {
+        font-size: 16px;
+        margin: 20px auto 30px;
+        max-width: 90%;
+      }
+      .card {
+        width: 150px;
+        height: 150px;
+        font-size: 17px;
+      }
+      .footer {
+        font-size: 12px;
+        right: 10px;
+        bottom: 10px;
+        padding: 6px 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <h1>โหลดเกม <span style="color: #ffe600;">AFK Journey</span><br>แล้วไปมันส์กันเลย!</h1>
+
+  <div class="season-text">
+    ซีซั่นใหม่ ความขัดแย้งกึกก้อง กำลังจะเริ่มต้นขึ้น  
+    เตรียมตัวให้พร้อมสำหรับการผจญภัยลึกลงไปใต้ดิน!  
+    ดื่มด่ำกับเรื่องราวสดใหม่ สำรวจสถานที่ลึกลับแห่งใหม่ และค้นพบความลับที่ถูกฝังอยู่นานนับพันปี!
+  </div>
+
+  <div class="container">
+    <a class="card" href="https://activity-afkjourney.farlightgames.com/GW-I2505031/" target="_blank">
+      Windows
+    </a>
+    <a class="card" href="https://apps.apple.com/us/app/afk-journey/id1628970855" target="_blank">
+      App Store
+    </a>
+    <a class="card" href="https://play.google.com/store/apps/details?id=com.farlightgames.igame.gp" target="_blank">
+      Google Play
+    </a>
+  </div>
+
+  <div class="footer">
+    <a href="https://www.facebook.com/nakharin.nangub/" target="_blank">
+      Made By: Nakharin Kijtiyapong
+    </a>
+  </div>
+
+</body>
+</html>
